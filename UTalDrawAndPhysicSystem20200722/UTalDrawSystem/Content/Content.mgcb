@@ -56,17 +56,11 @@
 /processorParam:TextureFormat=Color
 /build:black_hole.png
 
-#begin energy.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:energy.png
+#begin disparo_rayo.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:disparo_rayo.wav
 
 #begin energy.png
 /importer:TextureImporter
@@ -91,6 +85,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:energyShield.png
+
+#begin etfx_shoot_mystic.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:etfx_shoot_mystic.wav
 
 #begin fondo.png
 /importer:TextureImporter
@@ -122,6 +122,12 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Instrucciones.spritefont
+
+#begin MainGameSoundTrack.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:MainGameSoundTrack.ogg
 
 #begin meow_cookie.png
 /importer:TextureImporter

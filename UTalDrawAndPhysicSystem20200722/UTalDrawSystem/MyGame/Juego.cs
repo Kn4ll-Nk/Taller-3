@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTalDrawSystem.SistemaAudio;
 using UTalDrawSystem.SistemaDibujado;
 using UTalDrawSystem.SistemaFisico;
 using UTalDrawSystem.SistemaGameObject;
@@ -37,9 +38,9 @@ namespace UTalDrawSystem.MyGame
 
         public int score;
 
-        public Automovil auto;
+        public Nave ship;
         List<Background> listaFondo;
-        List<Pelota> listaAsteroides;
+        List<Asteroide> listaAsteroides;
         List<Agujero> listaAgujeros;
         List<Coleccionable> listaEnergy;
 
@@ -77,13 +78,13 @@ namespace UTalDrawSystem.MyGame
             score = 0;
 
             listaFondo = new List<Background>();
-            listaAsteroides = new List<Pelota>();
+            listaAsteroides = new List<Asteroide>();
             listaAgujeros = new List<Agujero>();
             listaEnergy = new List<Coleccionable>();
 
             listaProyectiles = new List<Proyectil>();
 
-            auto = new Automovil(content, "ship", new Vector2(450, Game1.INSTANCE.GraphicsDevice.Viewport.Height), 0.3f, UTGameObject.FF_form.Rectangulo);
+            ship = new Nave(content, "ship", new Vector2(450, Game1.INSTANCE.GraphicsDevice.Viewport.Height), 0.3f, UTGameObject.FF_form.Rectangulo);
 
             rnd = new Random();
             time = 0;
@@ -97,6 +98,9 @@ namespace UTalDrawSystem.MyGame
 
             camara = new Camara(new Vector2(0,0), .5f, 0);
             camara.HacerActiva();
+
+            AudioManager.PlaySong("MainGameSoundTrack", loop:true);
+
         }
 
         public override void Update(GameTime gameTime)
@@ -121,53 +125,55 @@ namespace UTalDrawSystem.MyGame
 
             camara.pos.X += cameraSpeed;
 
-            if (score >= auto.nuevaVida)
+            if (score >= ship.nuevaVida)
             {
-                auto.nuevaVida += 5000;
-                auto.vidas += 1;
+                ship.nuevaVida += 5000;
+                ship.vidas += 1;
             }
 
-            if (auto.isShooting && auto.shootCD <= 0)
+            if (ship.isShooting && ship.shootCD <= 0)
             {
-                auto.isShooting = false;
+                ship.isShooting = false;
 
-                switch (auto.buffLevel)
+                switch (ship.buffLevel)
                 {
                     case 5:
-                        auto.shootCD = 0.07f;
+                        ship.shootCD = 0.07f;
                         break;
                     default:
-                        auto.shootCD = 0.1f;
+                        ship.shootCD = 0.1f;
                         break;
                 }
 
-                switch (auto.buffLevel)
+                AudioManager.Play(AudioManager.Sounds.Disparo);
+
+                switch (ship.buffLevel)
                 {
-                    case 1:
-                        listaProyectiles.Add(new Proyectil("rayo", auto.objetoFisico.pos, 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                    case 1:                    
+                        listaProyectiles.Add(new Proyectil("rayo", ship.objetoFisico.pos, 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
                         break;
 
                     case 2:
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y - 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y + 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y - 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y + 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
                         break;
 
                     case 3:
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y - 10), 50, -25, -0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", auto.objetoFisico.pos, 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y + 10), 50, 25, 0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y - 10), 50, -25, -0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", ship.objetoFisico.pos, 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y + 10), 50, 25, 0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
                         break;
                     case 4:
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y - 10), 50, -25, -0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y - 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y + 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y + 10), 50, 25, 0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y - 10), 50, -25, -0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y - 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y + 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y + 10), 50, 25, 0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
                         break;
                     case 5:
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y - 10), 50, -25, -0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y - 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y + 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
-                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(auto.objetoFisico.pos.X, auto.objetoFisico.pos.Y + 10), 50, 25, 0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y - 10), 50, -25, -0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y - 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y + 10), 50, 0, 0, 1, UTGameObject.FF_form.Rectangulo, false, false));
+                        listaProyectiles.Add(new Proyectil("rayo", new Vector2(ship.objetoFisico.pos.X, ship.objetoFisico.pos.Y + 10), 50, 25, 0.3925f, 1, UTGameObject.FF_form.Rectangulo, false, false));
                         break;
                 }
             }
@@ -187,12 +193,12 @@ namespace UTalDrawSystem.MyGame
                 Console.WriteLine(listaProyectiles.Count);
             }
 
-            if (auto.objetoFisico.isColliding && !collision_on)
+            if (ship.objetoFisico.isColliding && !collision_on)
             {
                 collision_on = true;
                 n_Choques++;
             }
-            else if (!auto.objetoFisico.isColliding)
+            else if (!ship.objetoFisico.isColliding)
             {
                 collision_on = false;
             }
@@ -232,15 +238,15 @@ namespace UTalDrawSystem.MyGame
 
             if (timeSpawnAsteroides > 1.2f / difficultyLevel)
             {
-                listaAsteroides.Add(new Pelota("Asteroid", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 100, (int)camara.pos.Y - 100 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.3f, UTGameObject.FF_form.Circulo, false, true));
+                listaAsteroides.Add(new Asteroide("Asteroid", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 100, (int)camara.pos.Y - 100 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.3f, UTGameObject.FF_form.Circulo, false, true));
                 timeSpawnAsteroides = 0;
             }
             if (listaAsteroides.Count > 0)
             {
-                if (listaAsteroides.First<Pelota>().objetoFisico.pos.X < camara.pos.X - 200)
+                if (listaAsteroides.First<Asteroide>().objetoFisico.pos.X < camara.pos.X - 200)
                 {
-                    listaAsteroides.First<Pelota>().Destroy();
-                    listaAsteroides.Remove(listaAsteroides.First<Pelota>());
+                    listaAsteroides.First<Asteroide>().Destroy();
+                    listaAsteroides.Remove(listaAsteroides.First<Asteroide>());
                 }
             }
 
@@ -261,45 +267,45 @@ namespace UTalDrawSystem.MyGame
             /*SPAWNERS*********************************************************************************************************************************************************/
 
             //Verifica si es alcanzado por la cámara.
-            if (auto.objetoFisico.pos.X < camara.pos.X)
+            if (ship.objetoFisico.pos.X < camara.pos.X)
             {
-                if (!auto.invulnerable)
+                if (!ship.invulnerable)
                 {
-                    auto.invulnerable = true;
-                    auto.objetoFisico.pos = auto.Respawn();
+                    ship.invulnerable = true;
+                    ship.objetoFisico.pos = ship.Respawn();
                 }
             }
-            //Evita que salga por la parte izquierda cuando el auto es invulnerable.
-            if (auto.invulnerable && auto.objetoFisico.pos.X <= camara.pos.X + 30)
+            //Evita que salga por la parte izquierda cuando el ship es invulnerable.
+            if (ship.invulnerable && ship.objetoFisico.pos.X <= camara.pos.X + 30)
             {
-                auto.objetoFisico.pos = new Vector2(camara.pos.X + 30, auto.objetoFisico.pos.Y);
+                ship.objetoFisico.pos = new Vector2(camara.pos.X + 30, ship.objetoFisico.pos.Y);
             }
             
             //Evita que salga por la parte derecha
-            if (auto.objetoFisico.pos.X >= camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width*2)
+            if (ship.objetoFisico.pos.X >= camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width*2)
             {
-                auto.objetoFisico.pos = new Vector2(camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, auto.objetoFisico.pos.Y);
+                ship.objetoFisico.pos = new Vector2(camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, ship.objetoFisico.pos.Y);
             }
 
-            //Evita que el auto salga por la parte superior de la pantalla.
-            if (auto.objetoFisico.pos.Y <= camara.pos.Y + 75)
+            //Evita que el ship salga por la parte superior de la pantalla.
+            if (ship.objetoFisico.pos.Y <= camara.pos.Y + 75)
             {
-                auto.objetoFisico.pos = new Vector2(auto.objetoFisico.pos.X, camara.pos.Y + 75 );
+                ship.objetoFisico.pos = new Vector2(ship.objetoFisico.pos.X, camara.pos.Y + 75 );
             }
             
-            //Evita que el auto salga por la parte inferior de la pantalla.
-            if (auto.objetoFisico.pos.Y >= camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)
+            //Evita que el ship salga por la parte inferior de la pantalla.
+            if (ship.objetoFisico.pos.Y >= camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)
             {
-                auto.objetoFisico.pos = new Vector2(auto.objetoFisico.pos.X, camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2);
+                ship.objetoFisico.pos = new Vector2(ship.objetoFisico.pos.X, camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2);
             }
 
             //Gana vidas cada 25 monedas recogidas (supuestamente)
-            if (auto.powerUpTotales > 0 && auto.powerUpTotales%25 == 0)   
+            if (ship.powerUpTotales > 0 && ship.powerUpTotales%25 == 0)   
             {
                 if (!ganoVidas) //Limita las vidas ganadas cada 25 monedas a 1.
                 {
                     ganoVidas = true;
-                    auto.vidas++;
+                    ship.vidas++;
                 }
             }
             else if(ganoVidas)  
@@ -308,7 +314,7 @@ namespace UTalDrawSystem.MyGame
             }
 
             //Envia a la pantalla final si se acaban las vidas
-            if (auto.vidas <= 0)
+            if (ship.vidas <= 0)
             {
                 Game1.INSTANCE.ChangeScene(Game1.Scene.End);
             }
@@ -331,8 +337,8 @@ namespace UTalDrawSystem.MyGame
             SB.Draw(powerUpIcon, powerUpPos, null, Color.White, 0f, new Vector2(0, 0), new Vector2(0.05f, 0.05f), SpriteEffects.None, 1f);
 
             SB.DrawString(timer, "    " + Math.Round(time,2), timerPos, Color.White);
-            SB.DrawString(vidasActuales, "     x " + Game1.INSTANCE.ventanaJuego.auto.vidas, vidasPos, Color.White);
-            SB.DrawString(powerUpLevel, "    Energy lvl: " + Game1.INSTANCE.ventanaJuego.auto.buffLevel, powerUpPos, Color.White);
+            SB.DrawString(vidasActuales, "     x " + Game1.INSTANCE.ventanaJuego.ship.vidas, vidasPos, Color.White);
+            SB.DrawString(powerUpLevel, "    Energy lvl: " + Game1.INSTANCE.ventanaJuego.ship.buffLevel, powerUpPos, Color.White);
             SB.DrawString(puntajeTotal, "    Score: " + Game1.INSTANCE.ventanaJuego.score, scorePos, Color.White);
         }
 

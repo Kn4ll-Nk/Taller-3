@@ -103,7 +103,7 @@ namespace UTalDrawSystem.MyGame
                 SB.DrawString(titulo, "Juego del auto que choca con pelotas, muros y come monedas.\n", tituloPos, Color.Black);
                 SB.DrawString(mensaje, "Numero de Colisiones --> " + Game1.INSTANCE.ventanaJuego.n_Choques + "\n" +
                     "Tiempo Total --> " + Math.Round(Game1.INSTANCE.ventanaJuego.time, 2) + " Segundos\n" +
-                    "Power Ups recogidos --> " + Game1.INSTANCE.ventanaJuego.auto.powerUpTotales, mensajePos, Color.Black)
+                    "Power Ups recogidos --> " + Game1.INSTANCE.ventanaJuego.ship.powerUpTotales, mensajePos, Color.Black)
                     ;
                 SB.DrawString(accion, "Presiona 'R' para volver a la pantalla incial.\n", accionPos, Color.Black);
 
