@@ -25,13 +25,17 @@ namespace UTalDrawSystem.SistemaDibujado
             {
                 dibujablesInferior.Add(dib);
             }
-
-            dibujables.Add(dib);
-
-            if (isSuperior)
+            else if (isSuperior)
             {
                 dibujablesSuperior.Add(dib);
             }
+            else
+            {
+                dibujables.Add(dib);
+            }
+
+
+           
             
         }
         public void removerDib(Dibujable dib)

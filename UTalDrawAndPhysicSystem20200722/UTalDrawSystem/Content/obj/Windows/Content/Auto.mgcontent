@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Descargas/Proyecto-2-Alpha-SideScroller (2)/Proyecto-2-Alpha-SideScroller/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Auto.png</SourceFile>
+  <SourceFile>D:/Descargas/Proyecto-2-Alpha-SideScroller (2)/Taller 3  Progra 2D/Taller-3/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Auto.png</SourceFile>
   <SourceTime>2020-08-05T22:06:34-04:00</SourceTime>
-  <DestFile>D:/Descargas/Proyecto-2-Alpha-SideScroller (2)/Proyecto-2-Alpha-SideScroller/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Auto.xnb</DestFile>
-  <DestTime>2020-08-06T21:36:15.1744476-04:00</DestTime>
+  <DestFile>D:/Descargas/Proyecto-2-Alpha-SideScroller (2)/Taller 3  Progra 2D/Taller-3/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Auto.xnb</DestFile>
+  <DestTime>2020-08-07T15:31:40.4141575-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T13:35:54-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

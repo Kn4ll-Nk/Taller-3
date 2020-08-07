@@ -16,6 +16,7 @@ namespace UTalDrawSystem.MyGame
         UTGameObject shield;
 
         public int vidas;
+        public int nuevaVida;
         public int powerUpTotales = 0;
 
         public bool invulnerable;
@@ -31,6 +32,7 @@ namespace UTalDrawSystem.MyGame
         public Automovil(ContentManager content, string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false, bool isSuperior = true) : base(imagen, pos, escala, forma, isStatic, isSuperior)
         {
             vidas = 5;
+            nuevaVida = 5000;
             respawnPos = pos;
 
             invulnerable = false;
@@ -105,6 +107,7 @@ namespace UTalDrawSystem.MyGame
             {
                 col.Destroy();
                 powerUpTotales++;
+                Game1.INSTANCE.ventanaJuego.score += 1000;
 
                 if (buffLevel < 5)
                 {

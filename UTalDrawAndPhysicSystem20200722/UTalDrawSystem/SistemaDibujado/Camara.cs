@@ -30,7 +30,11 @@ namespace UTalDrawSystem.SistemaDibujado
 
         public void Dibujar(SpriteBatch SB)
         {
-            foreach(Dibujable dib in Escena.INSTANCIA.dibujables)
+            foreach (Dibujable dib in Escena.INSTANCIA.dibujablesInferior)
+            {
+                dib.Draw(SB, pos, rot, escala);
+            }
+            foreach (Dibujable dib in Escena.INSTANCIA.dibujables)
             {
                 dib.Draw(SB, pos, rot, escala);
             }

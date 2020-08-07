@@ -117,13 +117,15 @@ namespace UTalDrawSystem.MyGame
                 timeChangeDifficulty = 0;
                 difficultyLevel++;
                 
-                if (cameraSpeed < 10)
-                {
-                    //cameraSpeed += 1;
-                }
             }
 
             camara.pos.X += cameraSpeed;
+
+            if (score >= auto.nuevaVida)
+            {
+                auto.nuevaVida += 5000;
+                auto.vidas += 1;
+            }
 
             if (auto.isShooting && auto.shootCD <= 0)
             {
@@ -196,7 +198,7 @@ namespace UTalDrawSystem.MyGame
             }
 
             /*SPAWNERS*********************************************************************************************************************************************************/
-            /*
+            
             if (camara.pos.X % 400 == 0)
             {
                 listaFondo.Add(new Background("fondo", new Vector2(camara.pos.X + 800 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height), 2, UTGameObject.FF_form.Rectangulo, true,  false, true));
@@ -211,11 +213,11 @@ namespace UTalDrawSystem.MyGame
                     listaFondo.Remove(listaFondo.First<Background>());
                 }
             }
-            */
+            
             if (timeSpawnAgujeros > 4f)
             {
 
-                listaAgujeros.Add(new Agujero("black_hole", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 1, UTGameObject.FF_form.Circulo, false));
+                listaAgujeros.Add(new Agujero("black_hole", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 100, (int)camara.pos.Y - 100 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 1, UTGameObject.FF_form.Circulo, false));
 
                 timeSpawnAgujeros = 0;
             }
@@ -230,7 +232,7 @@ namespace UTalDrawSystem.MyGame
 
             if (timeSpawnAsteroides > 1.2f / difficultyLevel)
             {
-                listaAsteroides.Add(new Pelota("Asteroid", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.3f, UTGameObject.FF_form.Circulo, false, true));
+                listaAsteroides.Add(new Pelota("Asteroid", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 100, (int)camara.pos.Y - 100 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 0.3f, UTGameObject.FF_form.Circulo, false, true));
                 timeSpawnAsteroides = 0;
             }
             if (listaAsteroides.Count > 0)
@@ -244,7 +246,7 @@ namespace UTalDrawSystem.MyGame
 
             if (timeSpawnEnergy > 5f)
             {
-                posYEnergy = rnd.Next((int)camara.pos.Y + 200, (int)camara.pos.Y - 200 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2);
+                posYEnergy = rnd.Next((int)camara.pos.Y + 100, (int)camara.pos.Y - 100 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2);
                 listaEnergy.Add(new Coleccionable("energy", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, posYEnergy), 0.1f, UTGameObject.FF_form.Circulo, false));
                 timeSpawnEnergy = 0;
             }        

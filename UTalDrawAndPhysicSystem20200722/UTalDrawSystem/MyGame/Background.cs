@@ -12,9 +12,12 @@ namespace UTalDrawSystem.MyGame
     {
         public Background(string imagen, Vector2 pos, float escala, FF_form forma, bool isStatic = false, bool isSuperior = false, bool isInferior = false) : base(imagen, pos, escala, forma, isStatic, isSuperior, isInferior)
         {
-
             objetoFisico.isTrigger = true;
-
         }
+        public override void Update(GameTime gameTime)
+        {
+            objetoFisico.pos += new Vector2(4, 0);
+        }
+
     }
 }
