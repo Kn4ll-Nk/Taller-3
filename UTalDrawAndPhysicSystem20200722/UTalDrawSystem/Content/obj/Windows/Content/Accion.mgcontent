@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>D:/Descargas/Proyecto-2-Alpha-SideScroller (2)/Proyecto-2-Alpha-SideScroller/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/Accion.spritefont</SourceFile>
+  <SourceTime>2020-08-05T22:06:34-04:00</SourceTime>
+  <DestFile>D:/Descargas/Proyecto-2-Alpha-SideScroller (2)/Proyecto-2-Alpha-SideScroller/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/Accion.xnb</DestFile>
+  <DestTime>2020-08-06T21:36:14.9795483-04:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2018-12-08T13:35:54-03:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2018-12-08T13:35:54-03:00</ProcessorTime>
+  <Parameters>
+    <Key>PremultiplyAlpha</Key>
+    <Value>True</Value>
+  </Parameters>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>
