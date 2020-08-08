@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using UTalDrawSystem.SistemaAudio;
 using UTalDrawSystem.SistemaGameObject;
+using static UTalDrawSystem.SistemaAudio.AudioManager;
 
 namespace UTalDrawSystem.MyGame
 {
@@ -30,7 +33,7 @@ namespace UTalDrawSystem.MyGame
 
         public override void OnCollision(UTGameObject other)
         {
-            Pelota ball = other as Pelota;
+            Asteroide ball = other as Asteroide;
 
             if (ball != null)
             {

@@ -45,11 +45,12 @@
     <Compile Include="MyGame\Agujero.cs" />
     <Compile Include="MyGame\Background.cs" />
     <Compile Include="MyGame\Coleccionable.cs" />
-    <Compile Include="MyGame\Pelota.cs" />
+    <Compile Include="MyGame\Asteroide.cs" />
     <Compile Include="MyGame\Proyectil.cs" />
     <Compile Include="MyGame\VentanaManager.cs" />
     <Compile Include="MyGame\Juego.cs" />
-    <Compile Include="MyGame\Automovil.cs" />
+    <Compile Include="MyGame\Nave.cs" />
+    <Compile Include="SistemaAudio\AudioManager.cs" />
     <Compile Include="SistemaGameObjects\UTGameObject.cs" />
     <Compile Include="SistemaGameObjects\UTGameObjectsManager.cs" />
     <Compile Include="Program.cs" />

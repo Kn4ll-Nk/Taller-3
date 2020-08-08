@@ -20,7 +20,7 @@ namespace UTalDrawSystem.MyGame
         public override void OnCollision(UTGameObject other)
         {
             Coleccionable col = other as Coleccionable;
-            Pelota ball = other as Pelota;
+            Asteroide ball = other as Asteroide;
             Proyectil pry = other as Proyectil;
 
             if (col != null)

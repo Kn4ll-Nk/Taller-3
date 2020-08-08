@@ -20,9 +20,11 @@ namespace UTalDrawSystem
         VentanaManager ventanaInicio;
         VentanaManager ventanaFinal;
         VentanaManager ventanaCreditos;
+
+        Texture2D imagenFondo;
+
         public Juego ventanaJuego;
 
-     
         public enum Scene { Start, Game, End, Credits };
 
         public Scene ActiveScene = Scene.Start;
@@ -57,11 +59,7 @@ namespace UTalDrawSystem
                 ventanaCreditos = new VentanaManager(Content);
             }
 
-            
-
         }
-
-        
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -76,6 +74,8 @@ namespace UTalDrawSystem
             graphics.PreferredBackBufferHeight = 600;
             graphics.PreferredBackBufferWidth = 800;
             graphics.ApplyChanges();
+
+            imagenFondo = Content.Load<Texture2D>("space_intro");
 
             base.Initialize();
         }
@@ -139,7 +139,11 @@ namespace UTalDrawSystem
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
             spriteBatch.Begin();
+
+            spriteBatch.Draw(imagenFondo, new Vector2(0,0), Color.White);
+
             Camara.ActiveCamera.Dibujar(spriteBatch);
             if(ActiveScene == Scene.Start)
             {
