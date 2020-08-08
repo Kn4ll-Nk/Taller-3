@@ -263,7 +263,7 @@ namespace UTalDrawSystem.MyGame
             }
             /*SPAWNERS*********************************************************************************************************************************************************/
 
-            //Verifica si es alcanzado por la cámara.
+            //Verifica si la nave es alcanzada por la cámara.
             if (ship.objetoFisico.pos.X < camara.pos.X)
             {
                 if (!ship.invulnerable)
@@ -272,25 +272,25 @@ namespace UTalDrawSystem.MyGame
                     ship.objetoFisico.pos = ship.Respawn();
                 }
             }
-            //Evita que salga por la parte izquierda cuando el ship es invulnerable.
+            //Evita que salga por la parte izquierda cuando la nave es invulnerable.
             if (ship.invulnerable && ship.objetoFisico.pos.X <= camara.pos.X + 30)
             {
                 ship.objetoFisico.pos = new Vector2(camara.pos.X + 30, ship.objetoFisico.pos.Y);
             }
             
-            //Evita que salga por la parte derecha
+            //Evita que la nave salga por la parte derecha
             if (ship.objetoFisico.pos.X >= camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width*2)
             {
                 ship.objetoFisico.pos = new Vector2(camara.pos.X - 30 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, ship.objetoFisico.pos.Y);
             }
 
-            //Evita que el ship salga por la parte superior de la pantalla.
+            //Evita que la nave salga por la parte superior de la pantalla.
             if (ship.objetoFisico.pos.Y <= camara.pos.Y + 75)
             {
                 ship.objetoFisico.pos = new Vector2(ship.objetoFisico.pos.X, camara.pos.Y + 75 );
             }
             
-            //Evita que el ship salga por la parte inferior de la pantalla.
+            //Evita que la nave salga por la parte inferior de la pantalla.
             if (ship.objetoFisico.pos.Y >= camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)
             {
                 ship.objetoFisico.pos = new Vector2(ship.objetoFisico.pos.X, camara.pos.Y - 75 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2);
