@@ -16,7 +16,7 @@ namespace UTalDrawSystem.MyGame
         }
         public override void Update(GameTime gameTime)
         {
-            objetoFisico.pos += new Vector2(4, 0);
+            objetoFisico.pos += new Vector2(5f, 0);
         }
 
     }

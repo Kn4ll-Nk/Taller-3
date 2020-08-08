@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Joako/Downloads/Taller-3-master/Taller-3-master/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/energyShield.png</SourceFile>
-  <SourceTime>2020-08-07T17:05:45-04:00</SourceTime>
-  <DestFile>C:/Users/Joako/Downloads/Taller-3-master/Taller-3-master/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/energyShield.xnb</DestFile>
-  <DestTime>2020-08-07T17:33:00.1228743-04:00</DestTime>
+  <SourceFile>D:/Descargas/Taller-3-Implementacion-audio/Taller-3-Implementacion-audio/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/energyShield.png</SourceFile>
+  <SourceTime>2020-08-07T18:25:51-04:00</SourceTime>
+  <DestFile>D:/Descargas/Taller-3-Implementacion-audio/Taller-3-Implementacion-audio/UTalDrawAndPhysicSystem20200722/UTalDrawSystem/Content/bin/Windows/Content/energyShield.xnb</DestFile>
+  <DestTime>2020-08-07T18:32:07.6603937-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T13:35:54-03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

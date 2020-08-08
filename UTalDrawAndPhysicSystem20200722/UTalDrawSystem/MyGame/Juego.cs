@@ -99,7 +99,8 @@ namespace UTalDrawSystem.MyGame
             camara = new Camara(new Vector2(0,0), .5f, 0);
             camara.HacerActiva();
 
-            AudioManager.PlaySong("MainGameSoundTrack", loop:true);
+            listaFondo.Add(new Background("fondo", new Vector2(camara.pos.X, camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height), 2, UTGameObject.FF_form.Rectangulo, true, false, true));
+            listaFondo.Add(new Background("fondo", new Vector2(camara.pos.X + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height), 2, UTGameObject.FF_form.Rectangulo, true, false, true));
 
         }
 
@@ -107,14 +108,11 @@ namespace UTalDrawSystem.MyGame
         {
             base.Update(gameTime);
 
-            if (Game1.INSTANCE.ActiveScene == Game1.Scene.Game)
-            {
-                time += gameTime.ElapsedGameTime.TotalSeconds;
-                timeChangeDifficulty += gameTime.ElapsedGameTime.TotalSeconds;
-                timeSpawnAsteroides += gameTime.ElapsedGameTime.TotalSeconds;
-                timeSpawnAgujeros += gameTime.ElapsedGameTime.TotalSeconds;
-                timeSpawnEnergy += gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            time += gameTime.ElapsedGameTime.TotalSeconds;
+            timeChangeDifficulty += gameTime.ElapsedGameTime.TotalSeconds;
+            timeSpawnAsteroides += gameTime.ElapsedGameTime.TotalSeconds;
+            timeSpawnAgujeros += gameTime.ElapsedGameTime.TotalSeconds;
+            timeSpawnEnergy += gameTime.ElapsedGameTime.TotalSeconds;
 
             if (timeChangeDifficulty  >= 15)
             {
@@ -145,7 +143,7 @@ namespace UTalDrawSystem.MyGame
                         break;
                 }
 
-                AudioManager.Play(AudioManager.Sounds.Disparo);
+                AudioManager.Play(AudioManager.Sounds.Disparo_1, true);
 
                 switch (ship.buffLevel)
                 {
@@ -204,27 +202,26 @@ namespace UTalDrawSystem.MyGame
             }
 
             /*SPAWNERS*********************************************************************************************************************************************************/
-            
-            if (camara.pos.X % 400 == 0)
-            {
-                listaFondo.Add(new Background("fondo", new Vector2(camara.pos.X + 800 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height), 2, UTGameObject.FF_form.Rectangulo, true,  false, true));
-                listaFondo.Last<Background>().objetoFisico.isTrigger = true;
-            }
 
             if (listaFondo.Count > 0)
             {
-                if (listaFondo.First<Background>().objetoFisico.pos.X < camara.pos.X - 400)
+                if (listaFondo.Last<Background>().objetoFisico.pos.X < camara.pos.X +  800)
+                {
+                    listaFondo.Add(new Background("fondo", new Vector2(camara.pos.X + 800 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, camara.pos.Y + Game1.INSTANCE.GraphicsDevice.Viewport.Height), 2, UTGameObject.FF_form.Rectangulo, true, false, true));
+                    listaFondo.Last<Background>().objetoFisico.isTrigger = true;
+                }
+
+                if (listaFondo.First<Background>().objetoFisico.pos.X < camara.pos.X - 800)
                 {
                     listaFondo.First<Background>().Destroy();
                     listaFondo.Remove(listaFondo.First<Background>());
                 }
             }
+            Console.WriteLine(listaFondo.Count);
             
             if (timeSpawnAgujeros > 4f)
             {
-
                 listaAgujeros.Add(new Agujero("black_hole", new Vector2(camara.pos.X + 600 + Game1.INSTANCE.GraphicsDevice.Viewport.Width * 2, rnd.Next((int)camara.pos.Y + 100, (int)camara.pos.Y - 100 + Game1.INSTANCE.GraphicsDevice.Viewport.Height * 2)), 1, UTGameObject.FF_form.Circulo, false));
-
                 timeSpawnAgujeros = 0;
             }
             if (listaAgujeros.Count > 0)

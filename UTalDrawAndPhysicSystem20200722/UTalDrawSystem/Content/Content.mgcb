@@ -213,6 +213,18 @@
 /processorParam:TextureFormat=Color
 /build:ship.png
 
+#begin space_intro.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:space_intro.jpg
+
 #begin timer.png
 /importer:TextureImporter
 /processor:TextureProcessor
